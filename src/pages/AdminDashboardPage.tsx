@@ -1,29 +1,25 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LayoutDashboard, Scissors, MessageSquare, LogOut, Plus, Trash2, Pencil, Phone, MapPin } from "lucide-react";
 import { adminAuth, useServices, useTestimonials } from "@/lib/store";
 import { business, type Service, type Testimonial } from "@/data/mockData";
 import { Spinner } from "@/components/Spinner";
 
-export const Route = createFileRoute("/admin/dashboard")({
-  head: () => ({ meta: [{ title: "Admin Dashboard — Pawan Sain Salon" }] }),
-  component: Dashboard,
-});
-
 type Tab = "overview" | "services" | "testimonials";
 
-function Dashboard() {
+export default function AdminDashboardPage() {
   const navigate = useNavigate();
   const [tab, setTab] = useState<Tab>("overview");
 
   useEffect(() => {
-    if (!adminAuth.isLoggedIn()) navigate({ to: "/admin/login" });
+    if (!adminAuth.isLoggedIn()) navigate("/admin/login");
   }, [navigate]);
 
   const logout = () => {
     adminAuth.logout();
-    navigate({ to: "/admin/login" });
+    navigate("/admin/login");
   };
 
   const items: { key: Tab; label: string; icon: typeof LayoutDashboard }[] = [
@@ -34,6 +30,9 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen flex bg-secondary/30">
+      <Helmet>
+        <title>Admin Dashboard — Pawan Sain Salon</title>
+      </Helmet>
       <aside className="hidden md:flex w-64 flex-col bg-sidebar text-sidebar-foreground p-5">
         <div className="font-bold text-lg mb-8">
           <span className="text-sidebar-primary">Pawan Sain</span>

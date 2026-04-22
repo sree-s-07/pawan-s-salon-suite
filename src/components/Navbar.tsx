@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X, Phone, UserCog, User, LogOut } from "lucide-react";
 import { business } from "@/data/mockData";
@@ -9,6 +9,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { loggedIn, name } = useUserAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -19,15 +20,23 @@ export function Navbar() {
 
   const links = [
     { to: "/", label: "Home" },
+    { to: "/about", label: "About" },
     { to: "/services", label: "Services" },
     { to: "/booking", label: "Booking" },
   ] as const;
+
+  const isActive = (path: string) => {
+    if (path === "/") {
+      return location.pathname === "/";
+    }
+    return location.pathname.startsWith(path);
+  };
 
   const handleUserLogout = () => {
     userAuth.logout();
     emitAuthChange();
     setOpen(false);
-    navigate({ to: "/" });
+    navigate("/");
   };
 
   return (
@@ -47,9 +56,11 @@ export function Navbar() {
             <Link
               key={l.to}
               to={l.to}
-              className="px-4 py-2 text-sm font-medium text-foreground/70 hover:text-foreground rounded-full hover:bg-secondary transition-colors"
-              activeProps={{ className: "text-foreground bg-secondary" }}
-              activeOptions={{ exact: l.to === "/" }}
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                isActive(l.to)
+                  ? "text-foreground bg-secondary"
+                  : "text-foreground/70 hover:text-foreground hover:bg-secondary"
+              }`}
             >
               {l.label}
             </Link>
