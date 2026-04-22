@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Lock } from "lucide-react";
 import { auth } from "@/lib/store";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/admin/login")({
   head: () => ({ meta: [{ title: "Admin Login — Pawan Sain Salon" }] }),
   component: AdminLogin,
 });
