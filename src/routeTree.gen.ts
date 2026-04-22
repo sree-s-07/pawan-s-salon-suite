@@ -42,9 +42,9 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AdminRoute,
+  id: '/admin/dashboard',
+  path: '/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -104,6 +104,7 @@ export interface RootRouteChildren {
   BookingRoute: typeof BookingRoute
   LoginRoute: typeof LoginRoute
   ServicesRoute: typeof ServicesRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
   AdminLoginRoute: typeof AdminLoginRoute
 }
 
@@ -146,10 +147,10 @@ declare module '@tanstack/react-router' {
     }
     '/admin/dashboard': {
       id: '/admin/dashboard'
-      path: '/dashboard'
+      path: '/admin/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardRouteImport
-      parentRoute: typeof AdminRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -159,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookingRoute: BookingRoute,
   LoginRoute: LoginRoute,
   ServicesRoute: ServicesRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
   AdminLoginRoute: AdminLoginRoute,
 }
 export const routeTree = rootRouteImport
