@@ -20,7 +20,7 @@ export function Footer() {
           <div className="flex flex-col gap-1 text-sidebar-foreground/70">
             <Link to="/services" className="hover:text-sidebar-primary">Services</Link>
             <Link to="/booking" className="hover:text-sidebar-primary">Booking</Link>
-            <Link to="/admin" className="hover:text-sidebar-primary">Admin</Link>
+            <Link to="/admin/login" className="hover:text-sidebar-primary">Admin</Link>
           </div>
         </div>
       </div>
