@@ -1,24 +1,18 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Phone, Clock, AlertCircle, MapPin } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { business } from "@/data/mockData";
 
-export const Route = createFileRoute("/booking")({
-  head: () => ({
-    meta: [
-      { title: "Booking — Pawan Sain Salon" },
-      { name: "description", content: "Call-based booking only. 24-hour advance notice required for all home salon appointments in Jaipur." },
-      { property: "og:title", content: "Book Your Appointment — Pawan Sain Salon" },
-      { property: "og:description", content: "Call to book your home salon appointment in Jaipur." },
-    ],
-  }),
-  component: BookingPage,
-});
-
-function BookingPage() {
+export default function BookingPage() {
   return (
     <SiteLayout>
+      <Helmet>
+        <title>Booking — Pawan Sain Salon</title>
+        <meta name="description" content="Call-based booking only. 24-hour advance notice required for all home salon appointments in Jaipur." />
+        <meta property="og:title" content="Book Your Appointment — Pawan Sain Salon" />
+        <meta property="og:description" content="Call to book your home salon appointment in Jaipur." />
+      </Helmet>
       <section className="container mx-auto px-4 py-20 max-w-3xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold">Book Your Appointment</h1>

@@ -1,6 +1,6 @@
 import { Phone, MapPin, Clock } from "lucide-react";
 import { business } from "@/data/mockData";
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 
 export function Footer() {
   return (

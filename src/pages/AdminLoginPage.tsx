@@ -1,15 +1,11 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Lock, Loader2 } from "lucide-react";
+import { Lock, Loader2, ArrowLeft } from "lucide-react";
 import { adminAuth } from "@/lib/store";
 
-export const Route = createFileRoute("/admin/login")({
-  head: () => ({ meta: [{ title: "Admin Login — Pawan Sain Salon" }] }),
-  component: AdminLogin,
-});
-
-function AdminLogin() {
+export default function AdminLoginPage() {
   const navigate = useNavigate();
   const [u, setU] = useState("");
   const [p, setP] = useState("");
@@ -17,7 +13,7 @@ function AdminLogin() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (adminAuth.isLoggedIn()) navigate({ to: "/admin/dashboard" });
+    if (adminAuth.isLoggedIn()) navigate("/admin/dashboard");
   }, [navigate]);
 
   const submit = (e: React.FormEvent) => {
@@ -26,7 +22,7 @@ function AdminLogin() {
     setLoading(true);
     setTimeout(() => {
       if (adminAuth.login(u, p)) {
-        navigate({ to: "/admin/dashboard" });
+        navigate("/admin/dashboard");
       } else {
         setErr("Invalid credentials");
         setLoading(false);
@@ -36,6 +32,9 @@ function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "var(--gradient-soft)" }}>
+      <Helmet>
+        <title>Admin Login — Pawan Sain Salon</title>
+      </Helmet>
       <motion.form
         onSubmit={submit}
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -90,6 +89,12 @@ function AdminLogin() {
             {loading ? (<><Loader2 className="h-4 w-4 animate-spin" /> Signing in...</>) : "Sign In"}
           </button>
           <p className="text-xs text-muted-foreground text-center">Hint: admin / admin123</p>
+          <Link
+            to="/"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground hover:bg-secondary transition"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back to Home
+          </Link>
         </div>
       </motion.form>
     </div>

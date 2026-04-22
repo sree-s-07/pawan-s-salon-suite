@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Phone, Star, Clock, MapPin, Sparkles, Scissors, ShieldCheck, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/hero-barber.jpg";
@@ -11,26 +11,20 @@ import { Spinner } from "@/components/Spinner";
 import { useServices, useTestimonials } from "@/lib/store";
 import { business } from "@/data/mockData";
 
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Pawan Sain Salon Freelancer — Men's Home Salon Jaipur" },
-      { name: "description", content: "Premium men's grooming at your doorstep in Jaipur. Haircut, beard, facial & more. Call +91 96607 53211 to book." },
-      { property: "og:title", content: "Pawan Sain Salon Freelancer — Jaipur" },
-      { property: "og:description", content: "Premium men's home salon service in Jaipur." },
-    ],
-  }),
-  component: HomePage,
-});
-
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } },
 };
 
-function HomePage() {
+export default function HomePage() {
   return (
     <SiteLayout>
+      <Helmet>
+        <title>Pawan Sain Salon Freelancer — Men's Home Salon Jaipur</title>
+        <meta name="description" content="Premium men's grooming at your doorstep in Jaipur. Haircut, beard, facial & more. Call +91 96607 53211 to book." />
+        <meta property="og:title" content="Pawan Sain Salon Freelancer — Jaipur" />
+        <meta property="og:description" content="Premium men's home salon service in Jaipur." />
+      </Helmet>
       <Hero />
       <Stats />
       <About />

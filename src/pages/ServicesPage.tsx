@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -6,22 +6,16 @@ import { Spinner } from "@/components/Spinner";
 import { useServices } from "@/lib/store";
 import { business } from "@/data/mockData";
 
-export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services & Pricing — Pawan Sain Salon" },
-      { name: "description", content: "Haircut, beard trim, facial, hair color and more. Premium men's grooming at home in Jaipur." },
-      { property: "og:title", content: "Services & Pricing — Pawan Sain Salon" },
-      { property: "og:description", content: "Browse our full menu of men's home salon services." },
-    ],
-  }),
-  component: ServicesPage,
-});
-
-function ServicesPage() {
+export default function ServicesPage() {
   const { services } = useServices();
   return (
     <SiteLayout>
+      <Helmet>
+        <title>Services & Pricing — Pawan Sain Salon</title>
+        <meta name="description" content="Haircut, beard trim, facial, hair color and more. Premium men's grooming at home in Jaipur." />
+        <meta property="og:title" content="Services & Pricing — Pawan Sain Salon" />
+        <meta property="og:description" content="Browse our full menu of men's home salon services." />
+      </Helmet>
       <section className="container mx-auto px-4 py-16 max-w-6xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold">Services & Pricing</h1>

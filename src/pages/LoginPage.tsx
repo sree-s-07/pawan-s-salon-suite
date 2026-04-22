@@ -1,15 +1,11 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { User, Loader2 } from "lucide-react";
+import { User, Loader2, ArrowLeft } from "lucide-react";
 import { userAuth, emitAuthChange } from "@/lib/store";
 
-export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [{ title: "User Login — Pawan Sain Salon" }] }),
-  component: UserLogin,
-});
-
-function UserLogin() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -17,7 +13,7 @@ function UserLogin() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (userAuth.isLoggedIn()) navigate({ to: "/" });
+    if (userAuth.isLoggedIn()) navigate("/");
   }, [navigate]);
 
   const submit = (e: React.FormEvent) => {
@@ -31,12 +27,15 @@ function UserLogin() {
     setTimeout(() => {
       userAuth.login(name.trim());
       emitAuthChange();
-      navigate({ to: "/" });
+      navigate("/");
     }, 1200);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "var(--gradient-soft)" }}>
+      <Helmet>
+        <title>User Login — Pawan Sain Salon</title>
+      </Helmet>
       <motion.form
         onSubmit={submit}
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -91,6 +90,12 @@ function UserLogin() {
           <p className="text-xs text-muted-foreground text-center">
             Are you the admin? <Link to="/admin/login" className="font-medium text-foreground hover:underline">Login here</Link>
           </p>
+          <Link
+            to="/"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-background px-4 py-2.5 text-sm font-medium text-foreground hover:bg-secondary transition"
+          >
+            <ArrowLeft className="h-4 w-4" /> Back to Home
+          </Link>
         </div>
       </motion.form>
     </div>
