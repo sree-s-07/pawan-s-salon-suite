@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { LayoutDashboard, Scissors, MessageSquare, LogOut, Plus, Trash2, Pencil, Phone, MapPin } from "lucide-react";
-import { auth, useServices, useTestimonials } from "@/lib/store";
+import { adminAuth, useServices, useTestimonials } from "@/lib/store";
 import { business, type Service, type Testimonial } from "@/data/mockData";
 import { Spinner } from "@/components/Spinner";
 
@@ -18,12 +18,12 @@ function Dashboard() {
   const [tab, setTab] = useState<Tab>("overview");
 
   useEffect(() => {
-    if (!auth.isLoggedIn()) navigate({ to: "/admin" });
+    if (!adminAuth.isLoggedIn()) navigate({ to: "/admin/login" });
   }, [navigate]);
 
   const logout = () => {
-    auth.logout();
-    navigate({ to: "/admin" });
+    adminAuth.logout();
+    navigate({ to: "/admin/login" });
   };
 
   const items: { key: Tab; label: string; icon: typeof LayoutDashboard }[] = [
