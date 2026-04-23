@@ -2,10 +2,6 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Phone, Star, Clock, MapPin, Sparkles, Scissors, ShieldCheck, ArrowRight } from "lucide-react";
 import heroImg from "@/assets/hero-barber.jpg";
-import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
-import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Spinner } from "@/components/Spinner";
 import { useServices, useTestimonials } from "@/lib/store";
@@ -38,98 +34,122 @@ export default function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-      {/* decorative blurs */}
-      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
-      <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Image Cover */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src={heroImg} 
+          alt="Professional barber" 
+          className="w-full h-full object-cover"
+        />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2C1810]/90 via-[#2C1810]/70 to-[#2C1810]/40" />
+        {/* Decorative blur */}
+        <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-[#C9A962]/20 blur-3xl" />
+      </div>
 
-      <div className="container mx-auto px-4 lg:px-8 py-16 md:py-24 grid lg:grid-cols-2 gap-12 items-center relative">
-        <motion.div initial="hidden" animate="show" variants={fadeUp}>
-          <span className="inline-flex items-center gap-2 rounded-full bg-card border border-border px-4 py-1.5 text-xs font-semibold text-foreground/80 shadow-[var(--shadow-card)]">
-            <Sparkles className="h-3.5 w-3.5 text-accent" /> Jaipur's #1 Home Salon for Men
-          </span>
-          <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.05]">
-            Salon-grade<br />grooming at <span className="relative inline-block">
-              <span className="relative z-10">your home</span>
-              <span className="absolute bottom-1 left-0 right-0 h-3 bg-accent/40 -z-0" />
+      <div className="container mx-auto px-4 lg:px-8 py-24 lg:py-32 relative z-10">
+        <div className="max-w-3xl">
+          <motion.div initial="hidden" animate="show" variants={fadeUp}>
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 text-xs font-semibold text-white/90">
+              <Sparkles className="h-3.5 w-3.5 text-[#C9A962]" /> Jaipur's #1 Home Salon for Men
             </span>
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
-            {business.name}. Professional men's haircut, beard styling, facial & more — delivered to your doorstep in Jaipur.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={`tel:${business.phoneRaw}`}
-              className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-4 text-base font-semibold text-background shadow-[var(--shadow-elegant)] hover:scale-105 transition-transform"
-            >
-              <Phone className="h-5 w-5" /> Call {business.phone}
-            </a>
-            <a
-              href="/services"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-4 text-base font-semibold hover:bg-secondary transition"
-            >
-              View Services <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-          <div className="mt-10 flex items-center gap-6 text-sm">
-            <div className="flex -space-x-2">
-              {[g1, g2, g3, g4].map((src, i) => (
-                <img key={i} src={src} alt="" className="h-9 w-9 rounded-full border-2 border-background object-cover" />
-              ))}
+            
+            <h1 className="mt-6 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.05]">
+              Salon-grade<br />grooming at <span className="text-[#C9A962]">your home</span>
+            </h1>
+            
+            <p className="mt-6 text-lg text-white/80 max-w-xl leading-relaxed">
+              {business.name}. Professional men's haircut, beard styling, facial & more — delivered to your doorstep in Jaipur.
+            </p>
+            
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={`tel:${business.phoneRaw}`}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#C9A962] to-[#E5C88A] px-7 py-4 text-base font-semibold text-[#2C1810] shadow-[var(--shadow-gold)] hover:scale-105 transition-transform"
+              >
+                <Phone className="h-5 w-5" /> Call {business.phone}
+              </a>
+              <a
+                href="/services"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-7 py-4 text-base font-semibold text-white hover:bg-white/20 transition"
+              >
+                View Services <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+            
+            <div className="mt-10 flex items-center gap-6 text-sm">
+              <div className="flex -space-x-2">
+                {[
+                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+                ].map((src, i) => (
+                  <img key={i} src={src} alt="" className="h-9 w-9 rounded-full border-2 border-white object-cover" />
+                ))}
+              </div>
+              <div>
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-[#C9A962] text-[#C9A962]" />)}
+                </div>
+                <p className="text-xs text-white/70 mt-0.5">500+ happy clients in Jaipur</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Floating Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="hidden lg:block absolute bottom-24 right-8 glass rounded-2xl p-4 shadow-[var(--shadow-elegant)]"
+        >
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-[#C9A962]/20 grid place-items-center">
+              <ShieldCheck className="h-5 w-5 text-[#C9A962]" />
             </div>
             <div>
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-accent text-accent" />)}
-              </div>
-              <p className="text-xs text-muted-foreground mt-0.5">500+ happy clients in Jaipur</p>
+              <p className="font-semibold text-sm text-white">100% Hygienic</p>
+              <p className="text-xs text-white/70">Sanitized tools</p>
             </div>
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="hidden lg:block absolute top-32 right-32 glass rounded-2xl p-4 shadow-[var(--shadow-elegant)]"
         >
-          <div className="relative rounded-3xl overflow-hidden shadow-[var(--shadow-elegant)] aspect-[4/5] lg:aspect-[5/6]">
-            <img src={heroImg} alt="Professional barber styling hair" className="h-full w-full object-cover" width={1600} height={1024} />
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-[#C9A962] grid place-items-center">
+              <Clock className="h-5 w-5 text-[#2C1810]" />
+            </div>
+            <div>
+              <p className="font-semibold text-sm text-white">Same Day</p>
+              <p className="text-xs text-white/70">Slots available</p>
+            </div>
           </div>
-          {/* floating cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="absolute -bottom-6 -left-6 bg-card rounded-2xl p-4 shadow-[var(--shadow-elegant)] border border-border"
-          >
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-accent/20 grid place-items-center">
-                <ShieldCheck className="h-5 w-5 text-accent-foreground" />
-              </div>
-              <div>
-                <p className="font-semibold text-sm">100% Hygienic</p>
-                <p className="text-xs text-muted-foreground">Sanitized tools</p>
-              </div>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="absolute -top-4 -right-4 bg-card rounded-2xl p-4 shadow-[var(--shadow-elegant)] border border-border hidden sm:block"
-          >
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-foreground text-background grid place-items-center">
-                <Clock className="h-5 w-5" />
-              </div>
-              <div>
-                <p className="font-semibold text-sm">On-Time</p>
-                <p className="text-xs text-muted-foreground">Always punctual</p>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center pt-2">
+          <motion.div 
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="w-1 h-2 bg-white/60 rounded-full"
+          />
+        </div>
+      </motion.div>
     </section>
   );
 }
@@ -209,24 +229,50 @@ function ServicesPreview() {
 }
 
 function Gallery() {
-  const imgs = [g1, g2, g3, g4];
+  // High-quality barber/haircut images from Unsplash
+  const imgs = [
+    { src: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=800&q=80", title: "Classic Haircut", span: "md:col-span-2 md:row-span-2" },
+    { src: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&q=80", title: "Beard Styling", span: "" },
+    { src: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80", title: "Modern Fade", span: "" },
+    { src: "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=800&q=80", title: "Precision Cut", span: "md:col-span-2" },
+    { src: "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=800&q=80", title: "Hot Towel Shave", span: "" },
+    { src: "https://images.unsplash.com/photo-1593702295094-aea7d56b6447?w=800&q=80", title: "Salon Interior", span: "md:row-span-2" },
+    { src: "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80", title: "Beard Trim", span: "" },
+    { src: "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=800&q=80", title: "Hair Styling", span: "" },
+  ];
+
   return (
-    <section className="container mx-auto px-4 lg:px-8 py-24 max-w-6xl">
-      <div className="text-center mb-14">
-        <span className="text-xs font-bold uppercase tracking-widest text-accent-foreground bg-accent/30 px-3 py-1 rounded-full">Gallery</span>
-        <h2 className="mt-4 text-4xl md:text-5xl font-bold">Recent work</h2>
+    <section className="container mx-auto px-4 lg:px-8 py-24">
+      <div className="text-center mb-16">
+        <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#C9A962] bg-[#F5E6E0] px-4 py-2 rounded-full">
+          Portfolio
+        </span>
+        <h2 className="mt-6 text-4xl md:text-5xl font-display font-bold text-[#2C1810]">
+          Our <span className="text-[#C9A962]">Masterpiece</span> Gallery
+        </h2>
+        <p className="mt-4 text-lg text-[#8B6F6F] max-w-2xl mx-auto">
+          Premium haircuts and grooming services — crafted with precision and style
+        </p>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {imgs.map((src, i) => (
+
+      {/* Masonry Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px] md:auto-rows-[200px]">
+        {imgs.map((img, i) => (
           <motion.div
             key={i}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="overflow-hidden rounded-2xl aspect-square shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-elegant)] transition-shadow"
+            transition={{ delay: i * 0.1 }}
+            className={`relative overflow-hidden rounded-2xl cursor-pointer group ${img.span}`}
           >
-            <img src={src} alt={`Work ${i + 1}`} loading="lazy" width={800} height={800} className="h-full w-full object-cover hover:scale-110 transition-transform duration-500" />
+            <img src={img.src} alt={img.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#2C1810]/80 via-[#2C1810]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            {/* Title */}
+            <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+              <p className="text-white font-medium text-sm md:text-base">{img.title}</p>
+            </div>
           </motion.div>
         ))}
       </div>
